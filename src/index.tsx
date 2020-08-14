@@ -9,9 +9,9 @@ import { AuthRoutes } from './routes';
 const App: React.FC = () => {
     return (
         <NavigationContainer>
-            <StatusBar barStyle="light-content" backgroundColor="#321e38" />
+            <StatusBar barStyle="light-content" backgroundColor="#312e38" />
             <View style={{ 
-                backgroundColor: '#321e38', 
+                backgroundColor: '#312e38', 
                 flex: 1
             }}>
                 <AuthRoutes />
