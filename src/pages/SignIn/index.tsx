@@ -18,8 +18,9 @@ const SignIn: React.FC = () => {
                 behavior={ Platform.OS === 'ios' ? 'padding' : undefined }
                 enabled
             >
-                <ScrollView
+                <ScrollView 
                     keyboardShouldPersistTaps="handled"
+                    contentContainerStyle={{ flex: 1 }}
                 >
                     <Container>
                         <Image source={logoImg} />
