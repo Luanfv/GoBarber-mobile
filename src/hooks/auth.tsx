@@ -23,12 +23,14 @@ interface AuthContextData {
     user: object;
     signIn(credentials: SignInCredentials): Promise<void>;
     signOut(): void;
+    isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [data, setData] = useState<AuthState>({} as AuthState);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         async function loadStoragedData(): Promise<void> {
@@ -39,6 +41,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
             if (token[1] && user[1])
                 setData({ token: token[1], user: JSON.parse(user[1]) });
+                
+            setIsLoading(false);
         }
 
         loadStoragedData()
@@ -70,7 +74,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+        <AuthContext.Provider value={{ user: data.user, signIn, signOut, isLoading }}>
             {children}
         </AuthContext.Provider>
     );
