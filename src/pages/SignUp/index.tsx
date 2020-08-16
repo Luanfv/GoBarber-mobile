@@ -19,6 +19,7 @@ import logoImg from './../../assets/logo.png';
 import Input from './../../components/Input';
 import Button from './../../components/Button';
 import getValidationErrors from './../../utils/getValidationErrors';
+import api from './../../services/api';
 
 interface SignUpFormData {
     name: string;
@@ -46,11 +47,14 @@ const SignUp: React.FC = () => {
                 abortEarly: false,
             });
 
-            // await api.post('/users', data);
+            await api.post('/users', data);
 
-            // history.push('/');
+            Alert.alert(
+                'Cadastro realizado com sucesso!',
+                'Você já pode fazer logon no GoBarber.',
+            );
 
-
+            navigation.goBack();
         } catch (err) {
             const errors = getValidationErrors(err);
             formRef.current?.setErrors(errors);
