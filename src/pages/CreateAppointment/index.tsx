@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -31,6 +31,8 @@ import {
     SectionContent,
     Hour,
     HourText,
+    CreateAppointmentButton,
+    CreateAppointmentButtonText,
 } from './style';
 
 interface RouteParams {
@@ -51,7 +53,7 @@ interface AvailabilityItem {
 const CreateAppointment: React.FC = () => {
     const route = useRoute();
     const { user } = useAuth();
-    const { goBack } = useNavigation();
+    const { goBack, navigate } = useNavigation();
 
     const routeParams = route.params as RouteParams;
 
@@ -103,7 +105,7 @@ const CreateAppointment: React.FC = () => {
         .then(response => {
             setAvailability(response.data);
         });
-        
+
         setSelectedHour(0);
     }, [selectedDate, selectedProvider]);
 
@@ -130,6 +132,28 @@ const CreateAppointment: React.FC = () => {
     const handleSelectHour = useCallback((hour: number) => {
         setSelectedHour(hour);
     }, []);
+
+    const handleCreateAppointment = useCallback(async () => {
+        try {
+            const date = new Date(selectedDate);
+
+            date.setHours(selectedHour);
+            date.setMinutes(0);
+
+            await api.post('/appointments', {
+                provider_id: selectedProvider,
+                date,
+            });
+
+            navigate('AppointmentCreated', { date: date.getTime() });
+        }
+        catch (err) {
+            Alert.alert(
+                'Erro ao criar agendamento', 
+                'Ocorreu um erro ao criar esse agendamento, tente novamente.'
+            );
+        }
+    }, [selectedDate, selectedHour, selectedProvider, navigate]);
 
     return (
         <Container>
@@ -242,6 +266,12 @@ const CreateAppointment: React.FC = () => {
                         </SectionContent>
                     </Section>
                 </Schedule>
+
+                <CreateAppointmentButton onPress={handleCreateAppointment}>
+                    <CreateAppointmentButtonText>
+                        Agendar
+                    </CreateAppointmentButtonText>
+                </CreateAppointmentButton>
             </Content>
         </Container>
     );
