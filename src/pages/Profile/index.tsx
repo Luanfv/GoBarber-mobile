@@ -24,51 +24,71 @@ import { useAuth } from '../../hooks/auth';
 
 import { Container, Title, UserAvatarButton, UserAvatar, BackButton } from './style';
 
-interface SignUpFormData {
+interface ProfileFormData {
     name: string;
     email: string;
     password: string;
+    old_password: string;
+    confirmation_password: string;
 }
 
 const SignUp: React.FC = () => {
-    const { user } = useAuth();
+    const { user, updateUser } = useAuth();
 
     const navigation = useNavigation();
     const formRef = useRef<FormHandles>(null);
     const emailInputRef = useRef<TextInput>(null);
     const oldPasswordInputRef = useRef<TextInput>(null);
-    const confirmPasswordInputRef = useRef<TextInput>(null);
+    const confirmationPasswordInputRef = useRef<TextInput>(null);
     const passwordInputRef = useRef<TextInput>(null);
 
-    const handleSignUp = useCallback(async (data: SignUpFormData) => {
+    const handleSignUp = useCallback(async (data: ProfileFormData) => {
         try {
             formRef.current?.setErrors({});
 
             const schema = Yup.object().shape({
                 name: Yup.string().required('Nome obrigatório'),
                 email: Yup.string().required('E-mail obrigatório').email('Digite um e-mail válido'),
-                password: Yup.string().min(6, 'No mínimo 6 digitos')
+                old_password: Yup.string(),
+                password: Yup.string()
+                .when('old_password', {
+                    is: value => value.length,
+                    then: Yup.string().min(6),
+                    otherwise: Yup.string(),
+                }),
+                confirmation_password: Yup.string()
+                .when('old_password', {
+                    is: value => value.length,
+                    then: Yup.string().min(6),
+                    otherwise: Yup.string(),
+                })
+                .oneOf([Yup.ref('password')], 'Confirmação incorreta'),
             });
 
             await schema.validate(data, {
                 abortEarly: false,
             });
 
-            await api.post('/users', data);
+            const updateProfile = !!data.old_password ? data : { email: data.email, name: data.name };
+           
+            const response = await api.put('/profile', updateProfile);
 
-            Alert.alert(
-                'Cadastro realizado com sucesso!',
-                'Você já pode fazer logon no GoBarber.',
-            );
+            updateUser(response.data);
+
+            Alert.alert('Perfil atualizado com sucesso!');
 
             navigation.goBack();
         } catch (err) {
-            const errors = getValidationErrors(err);
-            formRef.current?.setErrors(errors);
+            if (err instanceof Yup.ValidationError) {
+                const errors = getValidationErrors(err);
+                formRef.current?.setErrors(errors);
+
+                return;
+            }
 
             Alert.alert(
-                'Erro no cadastro',
-                'Ocorreu um erro ao fazer o cadastro, tente novamente.',
+                'Erro na atualização do perfil', 
+                'Ocorreu um erro ao atualizar seu perfil, tente novamente'
             );
         }
     }, [navigation]);
@@ -101,7 +121,7 @@ const SignUp: React.FC = () => {
                             <Title>Meu perfil</Title>
                         </View>
                         
-                        <Form ref={formRef} onSubmit={handleSignUp}>
+                        <Form initialData={user} ref={formRef} onSubmit={handleSignUp}>
                             <Input 
                                 autoCapitalize="words"
                                 name="name" 
@@ -147,14 +167,14 @@ const SignUp: React.FC = () => {
                                 placeholder="Nova senha" 
                                 returnKeyType="next"
                                 onSubmitEditing={() => {
-                                    confirmPasswordInputRef.current?.focus();
+                                    confirmationPasswordInputRef.current?.focus();
                                 }}
                             />
                             <Input 
-                                ref={confirmPasswordInputRef}
+                                ref={confirmationPasswordInputRef}
                                 secureTextEntry
                                 textContentType="newPassword"
-                                name="password" 
+                                name="confirmation_password" 
                                 icon="lock" 
                                 placeholder="Senha" 
                                 returnKeyType="send"
