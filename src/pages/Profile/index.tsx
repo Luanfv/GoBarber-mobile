@@ -12,6 +12,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/Feather';
+import ImagePicker from 'react-native-image-picker';
 
 import Input from './../../components/Input';
 import Button from './../../components/Button';
@@ -91,11 +92,45 @@ const SignUp: React.FC = () => {
                 'Ocorreu um erro ao atualizar seu perfil, tente novamente'
             );
         }
-    }, [navigation]);
+    }, [navigation, updateUser]);
 
     const handleGoBack = useCallback(() => {
         navigation.goBack();
     }, [navigation]);
+
+    const handleUpdateAvatar = useCallback(() => {
+        ImagePicker.showImagePicker(
+            {
+                title: 'Selecionar um avatar',
+                cancelButtonTitle: 'Cancelar',
+                takePhotoButtonTitle: 'Usar câmera',
+                chooseFromLibraryButtonTitle: 'Escolher da galeria',
+            },
+            response => {
+                if (response.didCancel) 
+                    return;
+                
+                if (response.error) {
+                    Alert.alert('Erro ao atualizar seu avatar.');
+                    
+                    return;
+                }
+
+                const data = new FormData();
+
+                data.append('avatar', {
+                    uri: response.uri,
+                    type: 'image/jpeg',
+                    name: `${user.id}.jpg`,
+                });
+
+                api.patch('/users/avatar', data)
+                .then(apiResponse => {
+                    updateUser(apiResponse.data);
+                });
+            }
+        );
+    }, [ImagePicker, user.id, updateUser]);
 
     return (
         <ScrollView>
@@ -113,7 +148,7 @@ const SignUp: React.FC = () => {
                             <Icon name="chevron-left" size={24} color="#999591" />
                         </BackButton>
                         
-                        <UserAvatarButton onPress={() => {}}>
+                        <UserAvatarButton onPress={handleUpdateAvatar}>
                             <UserAvatar source={{ uri: user.avatar_url }} />
                         </UserAvatarButton>
 

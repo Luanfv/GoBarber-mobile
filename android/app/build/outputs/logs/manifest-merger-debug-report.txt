@@ -12,6 +12,7 @@ MERGED from [:react-native-community_async-storage] /home/luanfv/projetos/GoBarb
 MERGED from [:react-native-community_datetimepicker] /home/luanfv/projetos/GoBarber-mobile/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-community_masked-view] /home/luanfv/projetos/GoBarber-mobile/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-21:12
 MERGED from [:react-native-reanimated] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-safe-area-context] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-screens] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -96,6 +97,8 @@ MERGED from /home/luanfv/projetos/GoBarber-mobile/android/app/src/main/AndroidMa
 MERGED from /home/luanfv/projetos/GoBarber-mobile/android/app/src/main/AndroidManifest.xml:6:5-25:19
 MERGED from [:react-native-community_datetimepicker] /home/luanfv/projetos/GoBarber-mobile/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-20
 MERGED from [:react-native-community_datetimepicker] /home/luanfv/projetos/GoBarber-mobile/node_modules/@react-native-community/datetimepicker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-20
+MERGED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
+MERGED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
 MERGED from [com.facebook.react:react-native:0.63.2] /home/luanfv/.gradle/caches/transforms-2/files-2.1/d6e23d535d224bb32261779e2666d396/jetified-react-native-0.63.2/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.63.2] /home/luanfv/.gradle/caches/transforms-2/files-2.1/d6e23d535d224bb32261779e2666d396/jetified-react-native-0.63.2/AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.soloader:soloader:0.8.2] /home/luanfv/.gradle/caches/transforms-2/files-2.1/fe63e2f04783b5c513186b2b6e7e30fe/soloader-0.8.2/AndroidManifest.xml:11:5-20
@@ -178,6 +181,8 @@ MERGED from [:react-native-community_masked-view] /home/luanfv/projetos/GoBarber
 MERGED from [:react-native-community_masked-view] /home/luanfv/projetos/GoBarber-mobile/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-reanimated] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-reanimated] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-safe-area-context] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
@@ -298,3 +303,19 @@ uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from [com.facebook.flipper:flipper:0.37.0] /home/luanfv/.gradle/caches/transforms-2/files-2.1/623174cd4892d9fb924ac44b102b25c0/flipper-0.37.0/AndroidManifest.xml:16:5-76
 	android:name
 		ADDED from [com.facebook.flipper:flipper:0.37.0] /home/luanfv/.gradle/caches/transforms-2/files-2.1/623174cd4892d9fb924ac44b102b25c0/flipper-0.37.0/AndroidManifest.xml:16:22-73
+provider#com.imagepicker.FileProvider
+ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:10:9-18:20
+	android:grantUriPermissions
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-47
+	android:authorities
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-60
+	android:exported
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-37
+	android:name
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:13-56
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-17:58
+	android:resource
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:17-55
+	android:name
+		ADDED from [:react-native-image-picker] /home/luanfv/projetos/GoBarber-mobile/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:17-67
